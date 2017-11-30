@@ -1,24 +1,4 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @set_task.name %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @set_task.priority %>
-</p>
-
-<p>
-  <strong>Complete:</strong>
-  <%= @set_task.complete %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @set_task.user %>
-</p>
-
-<%= link_to 'Edit', edit_set_task_path(@set_task) %> |
-<%= link_to 'Back', set_tasks_path %>
+<script>
+    window.set_task = <%= sanitize @set_task.to_json %>;
+</script>

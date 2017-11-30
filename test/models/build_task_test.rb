@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  name          :string
 #  set_task_id   :integer
-#  complete      :boolean
+#  complete      :boolean          default(FALSE)
 #  notes         :text
 #  schematic_url :string
 #  user_id       :integer

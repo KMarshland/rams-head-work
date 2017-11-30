@@ -11,6 +11,7 @@ import readConfig from './helpers/read_config'
 
 import Navigation from './navigation'
 import NewTaskButton from './main_page/new_task_button'
+import SetTaskPanel from './set_tasks/set_task_panel'
 
 class MainPage extends React.PureComponent {
     render() {
@@ -19,6 +20,19 @@ class MainPage extends React.PureComponent {
                 <Navigation user={this.props.user} />
                 <div className="below">
                     <NewTaskButton user={this.props.user} />
+                </div>
+            </div>
+        )
+    }
+}
+
+class SetTaskPage extends React.PureComponent {
+    render() {
+        return (
+            <div>
+                <Navigation user={this.props.user} />
+                <div className="below container">
+                    <SetTaskPanel setTask={this.props.setTask} />
                 </div>
             </div>
         )
@@ -41,8 +55,13 @@ document.addEventListener('turbolinks:load', () => {
 
     let pageType = window.location.pathname;
 
+    if (/\/set_tasks\/\d+/.test(pageType)) {
+        pageType = '/set_tasks/*';
+    }
+
     const page = {
         '/': MainPage,
+        '/set_tasks/*': SetTaskPage
     }[pageType] || BlankPage;
 
     const Connection = connect(function (store) {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130050750) do
+ActiveRecord::Schema.define(version: 20171130060341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20171130050750) do
   create_table "build_tasks", force: :cascade do |t|
     t.string "name"
     t.bigint "set_task_id"
-    t.boolean "complete"
+    t.boolean "complete", default: false
     t.text "notes"
     t.string "schematic_url"
     t.bigint "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20171130050750) do
   create_table "set_tasks", force: :cascade do |t|
     t.string "name"
     t.integer "priority"
-    t.boolean "complete"
+    t.boolean "complete", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
