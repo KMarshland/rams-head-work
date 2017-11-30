@@ -16,11 +16,22 @@ import BuildTaskPanel from './tasks/build_task_panel'
 
 class MainPage extends React.PureComponent {
     render() {
+
+        const tasks = this.props.setTasks.sortBy((task) => {
+            return task.get('priority');
+        });
+
         return (
             <div>
                 <Navigation user={this.props.user} />
                 <div className="below">
                     <NewTaskButton user={this.props.user} />
+
+                    {tasks.map((function (setTask) {
+                        return (
+                            <SetTaskPanel key={setTask.get('id')} setTask={setTask} />
+                        )
+                    }).bind(this))}
                 </div>
             </div>
         )

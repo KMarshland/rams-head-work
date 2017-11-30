@@ -1,4 +1,8 @@
 
+.task-panel {
+  margin-top: 20px;
+}
+
 .set-task-panel {
 
   .priority {
@@ -9,7 +13,10 @@
 
   .priority-0 {
     border-color: red;
-    font-size: 4em;
+
+    p:first-child {
+      font-size: 2em;
+    }
   }
 
   $base-color: #7FFF00;

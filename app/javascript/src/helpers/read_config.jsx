@@ -16,6 +16,11 @@ export default function readConfig(store) {
         });
 
         store.dispatch({
+            type: 'SET_SET_TASKS',
+            set_tasks: window.set_tasks
+        });
+
+        store.dispatch({
             type: 'SET_BUILD_TASK',
             build_task: window.build_task
         });
