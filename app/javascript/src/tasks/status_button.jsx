@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import refreshSetTasks from '../helpers/refresh_set_tasks'
+import store from '../store'
+
 export default class StatusButton extends React.PureComponent {
 
     constructor(props) {
@@ -12,25 +15,97 @@ export default class StatusButton extends React.PureComponent {
         this.claim = this.claim.bind(this);
     }
 
-    markComplete() {
+    markComplete(e) {
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
 
+        this.sendRequest({
+            path: '/mark_complete',
+            messageTitle: 'Marked complete!',
+            requestNotes: true
+        })
     }
 
-    relinquish() {
+    relinquish(e) {
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
 
+        this.sendRequest({
+            path: '/relinquish',
+            messageTitle: 'Relinquished!',
+            messageText: 'That means that other people can now claim this task, and you can work on something else',
+            requestNotes: true
+        })
     }
 
-    claim() {
+    claim(e) {
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
 
+        this.sendRequest({
+            path: '/claim',
+            messageTitle: 'Claimed!'
+        })
+    }
+
+    sendRequest(opts) {
+
+        if (opts.requestNotes) {
+            swal({title: 'Any notes?', input: 'textarea'}).then((function(r){
+                if (r.value) {
+                    go.call(this, r.value);
+                }
+            }).bind(this));
+        } else {
+            go.call(this);
+        }
+
+        function go(notes) {
+            const setTaskId = this.props.buildTask.get('set_task_id');
+            const baseUrl = '/set_tasks/' + setTaskId + '/build_tasks/' + this.props.buildTask.get('id');
+
+            $.ajax({
+                url: baseUrl + opts.path + '.json',
+                data: {
+                    notes: notes
+                },
+                method: 'POST',
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader('X-CSRF-Token', window.csrfToken)
+                },
+                success: function (response) {
+                    swal({title: opts.messageTitle, type: 'success', text: opts.messageText});
+
+                    window.build_task = response.build_task;
+                    window.set_task = response.set_task;
+
+                    store.dispatch({
+                        type: 'SET_BUILD_TASK',
+                        build_task: window.build_task
+                    });
+
+                    store.dispatch({
+                        type: 'SET_SET_TASK',
+                        set_task: window.set_task
+                    });
+
+                    refreshSetTasks();
+                },
+                error: function (err) {
+                    const reason = (err.responseJSON || {reason: 'Unexpected error'}).reason;
+                    swal({title: 'Failure', type: 'error', text: reason})
+                }
+            })
+        }
     }
 
     render() {
 
         const task = this.props.buildTask;
 
-        const completed = task.get('completed');
+        const complete = task.get('complete');
 
-        if (completed) {
+        if (complete) {
             return (
                 <div className="status-button completed">
                     <i className="fa fa-check-circle-o" /> Completed

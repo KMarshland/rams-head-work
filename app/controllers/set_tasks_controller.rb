@@ -6,6 +6,10 @@ class SetTasksController < ApplicationController
   # GET /set_tasks.json
   def index
     @set_tasks = SetTask.all
+
+    render json: {
+        set_tasks: @set_tasks
+    }
   end
 
   # GET /set_tasks/1

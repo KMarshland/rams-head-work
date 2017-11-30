@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :set_tasks do
-    resources :build_tasks
+    resources :build_tasks do
+      post 'claim'
+      post 'relinquish'
+      post 'mark_complete'
+    end
   end
 
   devise_for :users

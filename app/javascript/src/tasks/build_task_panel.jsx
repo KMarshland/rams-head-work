@@ -72,7 +72,9 @@ export default class BuildTaskPanel extends React.PureComponent {
                         </div>
 
                         <div>
-                            {task.get('notes')}
+                            {task.get('notes').split("\n").map(function (line, i) {
+                                return <p key={i}>{line}</p>
+                            })}
                         </div>
                     </div>
 

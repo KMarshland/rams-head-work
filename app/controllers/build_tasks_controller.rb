@@ -1,6 +1,91 @@
 class BuildTasksController < ApplicationController
-  before_action :set_tasks, only: [:show, :edit, :update, :destroy]
+  before_action :set_tasks, only: [:show, :edit, :update, :destroy, :claim, :relinquish, :mark_complete]
   before_action :requires_admin
+
+  def claim
+    if @build_task.user.present?
+      return render json: {
+          success: false,
+          reason: "You can't claim a claimed task"
+      }, status: :unprocessable_entity
+    end
+
+    # TODO: check skills
+
+    if BuildTask.where(user_id: current_user.id, complete: false).exists?
+      return render json: {
+          success: false,
+          reason: "You can't claim a task while you already have another one claimed"
+      }, status: :unprocessable_entity
+    end
+
+    if @build_task.update({user_id: current_user.id})
+      render json: {
+          success: true,
+          build_task: @build_task,
+          set_task: @build_task.set_task
+      }
+    else
+      render json: {
+          success: false,
+          reason: @build_task.errors
+      }, status: :unprocessable_entity
+    end
+  end
+
+  def relinquish
+    unless @build_task.user_id == current_user.id
+      return render json: {
+          success: false,
+          reason: "You can't relinquish a claim you don't own"
+      }, status: :unprocessable_entity
+    end
+
+    notes = @build_task.notes
+    if params[:notes]
+      notes << "\n\n#{params[:notes]}"
+    end
+
+    if @build_task.update({user_id: nil, notes: notes})
+      render json: {
+          success: true,
+          build_task: @build_task,
+          set_task: @build_task.set_task
+      }
+    else
+      render json: {
+          success: false,
+          reason: @build_task.errors
+      }, status: :unprocessable_entity
+    end
+  end
+
+  def mark_complete
+    unless @build_task.user_id == current_user.id
+      return render json: {
+          success: false,
+          reason: "You can't complete a task you haven't claimed"
+      }, status: :unprocessable_entity
+    end
+
+    notes = @build_task.notes
+    if params[:notes]
+      notes << "\n\n#{params[:notes]}"
+    end
+
+    if @build_task.update({complete: true, notes: notes})
+      render json: {
+          success: true,
+          build_task: @build_task,
+          set_task: @build_task.set_task
+      }
+    else
+      render json: {
+          success: false,
+          reason: @build_task.errors
+      }, status: :unprocessable_entity
+    end
+  end
 
   # GET /build_tasks
   # GET /build_tasks.json
@@ -67,7 +152,7 @@ class BuildTasksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_tasks
     @set_task = SetTask.find(params[:set_task_id])
-    @build_task = BuildTask.find(params[:id])
+    @build_task = BuildTask.find(params[:id] || params[:build_task_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

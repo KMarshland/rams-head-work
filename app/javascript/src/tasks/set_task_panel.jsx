@@ -58,7 +58,9 @@ export default class SetTaskPanel extends React.PureComponent {
                     <div className="sub-panels">
 
                         {
-                            task.get('build_tasks').map((function (buildTask, i) {
+                            task.get('build_tasks').sortBy((task) => {
+                                return task.get('id');
+                            }).map((function (buildTask, i) {
                                 return (
                                     <BuildTaskSubpanel key={i}
                                                        buildTask={buildTask}
