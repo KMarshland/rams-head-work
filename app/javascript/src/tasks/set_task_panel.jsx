@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import BuildTaskSubpanel from './build_task_subpanel'
+
 export default class SetTaskPanel extends React.PureComponent {
 
     constructor(props) {
@@ -55,14 +57,27 @@ export default class SetTaskPanel extends React.PureComponent {
 
                     <div className="sub-panels">
 
-                        <div className="panel panel-default sub-panel col-md-4">
-                            <div className="panel-body">
-                                <a className="add-build-task" href={'/set_tasks/' + task.get('id') + '/build_tasks/new'}>
-                                    <i className="fa fa-plus" />
-                                    <span className="label">Add a build task</span>
-                                </a>
+                        {
+                            task.get('build_tasks').map(function (buildTask, i) {
+                                return (
+                                    <BuildTaskSubpanel key={i} buildTask={buildTask} />
+                                )
+                            })
+                        }
+
+                        {
+                            this.props.user && this.props.user.get('is_admin') &&
+                            <div className="col-md-4">
+                                <div className="panel panel-default sub-panel">
+                                    <div className="panel-body" onClick={() => {window.location = '/set_tasks/' + task.get('id') + '/build_tasks/new'}}>
+                                        <a className="add-build-task" href={'/set_tasks/' + task.get('id') + '/build_tasks/new'}>
+                                            <i className="fa fa-plus" />
+                                            <span className="label">Add a build task</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
 
                     </div>
 
@@ -87,5 +102,6 @@ export default class SetTaskPanel extends React.PureComponent {
 }
 
 SetTaskPanel.propTypes = {
-    setTask: PropTypes.instanceOf(Immutable.Map).isRequired
+    setTask: PropTypes.instanceOf(Immutable.Map).isRequired,
+    user: PropTypes.instanceOf(Immutable.Map).isRequired
 };

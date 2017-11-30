@@ -74,7 +74,7 @@ class BuildTasksController < ApplicationController
   def build_task_params
     params.require(:build_task).permit(:name, :set_task_id, :complete, :notes, :schematic_url, :user_id,
                                        skills: (0..User.skills.length).map(&:to_s)).tap do |params|
-      params[:skills] = params[:skills].values
+      params[:skills] = params[:skills].values if params[:skills].present?
     end
   end
 end

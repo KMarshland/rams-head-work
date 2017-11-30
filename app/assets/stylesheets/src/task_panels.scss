@@ -32,6 +32,29 @@
     margin-top: 20px;
   }
 
+  .sub-panel {
+    cursor: pointer;
+    margin: 16px 0;
+
+    min-height: 155px;
+  }
+
+  .sub-panel:hover {
+    color: #FFF;
+
+    a, .label {
+      color: #FFF;
+    }
+  }
+
+  .build-task-subpanel {
+    font-size: 2em;
+
+    a {
+      display: block;
+    }
+  }
+
   .add-build-task {
     font-size: 4em;
     color: white;
@@ -40,6 +63,7 @@
     .label {
       display: block;
       font-size: 0.5em;
+      color: #DDD;
     }
   }
 

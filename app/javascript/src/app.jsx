@@ -29,7 +29,10 @@ class MainPage extends React.PureComponent {
 
                     {tasks.map((function (setTask) {
                         return (
-                            <SetTaskPanel key={setTask.get('id')} setTask={setTask} />
+                            <SetTaskPanel key={setTask.get('id')}
+                                          setTask={setTask}
+                                          user={this.props.user}
+                            />
                         )
                     }).bind(this))}
                 </div>
@@ -44,7 +47,10 @@ class SetTaskPage extends React.PureComponent {
             <div>
                 <Navigation user={this.props.user} />
                 <div className="below container">
-                    <SetTaskPanel setTask={this.props.setTask} />
+                    <SetTaskPanel
+                        setTask={this.props.setTask}
+                        user={this.props.user}
+                    />
                 </div>
             </div>
         )
