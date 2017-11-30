@@ -58,11 +58,14 @@ export default class SetTaskPanel extends React.PureComponent {
                     <div className="sub-panels">
 
                         {
-                            task.get('build_tasks').map(function (buildTask, i) {
+                            task.get('build_tasks').map((function (buildTask, i) {
                                 return (
-                                    <BuildTaskSubpanel key={i} buildTask={buildTask} />
+                                    <BuildTaskSubpanel key={i}
+                                                       buildTask={buildTask}
+                                                       user={this.props.user}
+                                    />
                                 )
-                            })
+                            }).bind(this))
                         }
 
                         {
@@ -103,5 +106,5 @@ export default class SetTaskPanel extends React.PureComponent {
 
 SetTaskPanel.propTypes = {
     setTask: PropTypes.instanceOf(Immutable.Map).isRequired,
-    user: PropTypes.instanceOf(Immutable.Map).isRequired
+    user: PropTypes.instanceOf(Immutable.Map)
 };

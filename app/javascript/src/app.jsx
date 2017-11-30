@@ -62,7 +62,10 @@ class BuildTaskPage extends React.PureComponent {
             <div>
                 <Navigation user={this.props.user} />
                 <div className="below container">
-                    <BuildTaskPanel buildTask={this.props.buildTask} />
+                    <BuildTaskPanel
+                        buildTask={this.props.buildTask}
+                        user={this.props.user}
+                    />
                 </div>
             </div>
         )

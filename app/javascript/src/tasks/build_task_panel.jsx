@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import StatusButton from './status_button'
+
 export default class BuildTaskPanel extends React.PureComponent {
 
     constructor(props) {
@@ -52,6 +54,13 @@ export default class BuildTaskPanel extends React.PureComponent {
                         </a>
                     </h2>
 
+                    <div className="text-center">
+                        <StatusButton
+                            buildTask={this.props.buildTask}
+                            user={this.props.user}
+                        />
+                    </div>
+
                     <div className="larger">
                         <div>
                             <h2>Required Skills</h2>
@@ -88,5 +97,6 @@ export default class BuildTaskPanel extends React.PureComponent {
 }
 
 BuildTaskPanel.propTypes = {
-    buildTask: PropTypes.instanceOf(Immutable.Map).isRequired
+    buildTask: PropTypes.instanceOf(Immutable.Map).isRequired,
+    user: PropTypes.instanceOf(Immutable.Map)
 };

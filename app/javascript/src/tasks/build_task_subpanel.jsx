@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import StatusButton from './status_button'
+
 export default class BuildTaskSubpanel extends React.PureComponent {
 
     render() {
@@ -16,6 +18,11 @@ export default class BuildTaskSubpanel extends React.PureComponent {
                         <a href={link}>
                             {task.get('name')}
                         </a>
+
+                        <StatusButton
+                            buildTask={this.props.buildTask}
+                            user={this.props.user}
+                        />
                     </div>
                 </div>
             </div>
@@ -26,4 +33,5 @@ export default class BuildTaskSubpanel extends React.PureComponent {
 
 BuildTaskSubpanel.propTypes = {
     buildTask: PropTypes.instanceOf(Immutable.Map).isRequired,
+    user: PropTypes.instanceOf(Immutable.Map)
 };

@@ -86,3 +86,17 @@
     }
   }
 }
+
+.status-button.completed {
+  font-size: 1.6em;
+}
+
+.status-button.claimed-by-you {
+  p {
+    margin: 0 0 0 5px;
+  }
+}
+
+.status-button.claimed {
+  font-size: 1.6em;
+}
