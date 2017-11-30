@@ -57,7 +57,8 @@ class SetTasksController < ApplicationController
   def destroy
     @set_task.destroy
     respond_to do |format|
-      format.html { redirect_to set_tasks_url, notice: 'Set task was successfully destroyed.' }
+      flash[:notice] = 'Set task was successfully destroyed.'
+      format.html { redirect_to set_tasks_url }
       format.json { head :no_content }
     end
   end

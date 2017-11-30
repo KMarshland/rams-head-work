@@ -1,0 +1,25 @@
+
+.task-panel {
+  .delete-button {
+    font-size: 1.6em;
+
+    $size: 40px;
+    width: $size;
+    height: $size;
+    padding: 5px;
+
+    background: #111;
+    border-radius: 6px;
+    border: 1px solid #333;
+
+    text-align: center;
+    color: #CCC;
+
+    cursor: pointer;
+
+  }
+
+  .delete-button:hover, .delete-button:focus {
+    color: #EEE;
+  }
+}
