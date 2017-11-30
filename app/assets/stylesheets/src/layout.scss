@@ -11,9 +11,6 @@ body {
   .panel-button {
     font-size: 1.6em;
 
-    $size: 40px;
-    width: $size;
-    height: $size;
     padding: 5px;
 
     background: #111;
@@ -27,7 +24,13 @@ body {
 
   }
 
-  .panel-button + .panel-button {
+  .pull-right.panel-button {
+    $size: 40px;
+    width: $size;
+    height: $size;
+  }
+
+  .pull-right.panel-button + .pull-right.panel-button {
     margin-right: 5px;
   }
 
