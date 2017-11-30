@@ -10,7 +10,17 @@ class BuildTasksController < ApplicationController
       }, status: :unprocessable_entity
     end
 
-    # TODO: check skills
+    missing_skills = []
+    @build_task.skills.each do |skill|
+      missing_skills << skill unless current_user.skills.include? skill
+    end
+
+    unless missing_skills.blank?
+      return render json: {
+          success: false,
+          reason: "Missing required skills: #{missing_skills.join(', ')}"
+      }, status: :unprocessable_entity
+    end
 
     if BuildTask.where(user_id: current_user.id, complete: false).exists?
       return render json: {
@@ -159,6 +169,7 @@ class BuildTasksController < ApplicationController
   def build_task_params
     params.require(:build_task).permit(:name, :set_task_id, :complete, :notes, :schematic_url, :user_id,
                                        skills: (0..User.skills.length).map(&:to_s)).tap do |params|
+      params[:skills] = []
       params[:skills] = params[:skills].values if params[:skills].present?
     end
   end

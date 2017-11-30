@@ -65,6 +65,10 @@ export default class BuildTaskPanel extends React.PureComponent {
                         <div>
                             <h2>Required Skills</h2>
                             <ul>
+                                {
+                                    task.get('skills').length == 0 &&
+                                    <li>None</li>
+                                }
                                 {task.get('skills').map(function (skill) {
                                     return <li key={skill}>{skill}</li>
                                 })}
