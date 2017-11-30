@@ -27,7 +27,9 @@
       <%= form.label :schematic %>
       <%= form.file_field :schematic, id: :build_task_schematic, class: 'form-control upload-input' %>
       <%= form.hidden_field :schematic_url, id: :build_task_schematic_url %>
-      <div id="filename"></div>
+      <div id="filename">
+        <%= build_task.schematic_url %>
+      </div>
       <div id="preview">
 
       </div>
@@ -61,5 +63,9 @@
         $('#build_task_schematic_url').val(info.url);
         $('#filename').text(info.filename + ' (' + info.filesize_pretty + ')');
         embed(info.url, $('#preview'));
-    })
+    });
+
+    <% if build_task.schematic_url %>
+    embed("<%= build_task.schematic_url %>", $('#preview'));
+    <% end %>
 </script>

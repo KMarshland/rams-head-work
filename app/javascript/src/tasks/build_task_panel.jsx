@@ -9,6 +9,8 @@ export default class BuildTaskPanel extends React.PureComponent {
     constructor(props) {
         super(props);
 
+        this.embedId = 'embed-' + Math.round(Math.random() * 1e9).toString(36);
+
         this.deleteTask = this.deleteTask.bind(this);
     }
 
@@ -25,6 +27,24 @@ export default class BuildTaskPanel extends React.PureComponent {
                 window.location = '/set_tasks/' + setTaskId;
             }
         })
+    }
+
+    embedSchematic() {
+        const url = this.props.buildTask.get('schematic_url');
+
+        if (!url) {
+            return;
+        }
+
+        embed(url, this.refs.embed);
+    }
+
+    componentDidMount() {
+        const embedSchematic = this.embedSchematic.bind(this);
+
+        setTimeout(function () {
+            window.requestAnimationFrame(embedSchematic);
+        }, 0);
     }
 
     render() {
@@ -81,6 +101,8 @@ export default class BuildTaskPanel extends React.PureComponent {
                             })}
                         </div>
                     </div>
+
+                    <div className="embed" ref="embed" id={this.embedId} />
 
                 </div>
             </div>
