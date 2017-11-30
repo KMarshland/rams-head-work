@@ -40,9 +40,17 @@ export default class BuildTaskPanel extends React.PureComponent {
                         <i className="fa fa-trash" />
                     </a>
 
+                    <br />
+
                     <h1 className="text-center">
                         {task.get('name')}
                     </h1>
+
+                    <h2 className="text-center">
+                        <a href={'/set_tasks/' + task.get('set_task_id')}>
+                            Part of {task.get('set_task_name')}
+                        </a>
+                    </h2>
 
                     <div className="larger">
                         <div>

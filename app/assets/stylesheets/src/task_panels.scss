@@ -42,4 +42,16 @@
   .larger {
     font-size: 1.4em;
   }
+
+  h2 {
+    margin-top: 0;
+
+    a {
+      color: #DDD;
+    }
+
+    a:hover, a:focus {
+      color: #FFF;
+    }
+  }
 }

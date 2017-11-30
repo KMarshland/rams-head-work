@@ -39,6 +39,7 @@ class BuildTask < ApplicationRecord
         id: self.id,
         name: self.name,
         set_task_id: self.set_task_id,
+        set_task_name: self.set_task.name,
         complete: self.complete,
         notes: self.notes,
         schematic_url: self.schematic_url,
