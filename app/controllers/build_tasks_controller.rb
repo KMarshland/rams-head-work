@@ -1,6 +1,7 @@
 class BuildTasksController < ApplicationController
   before_action :set_tasks, only: [:show, :edit, :update, :destroy, :claim, :relinquish, :mark_complete]
   before_action :requires_admin
+  before_action :set_s3_direct_post
 
   def claim
     if @build_task.user.present?
@@ -173,4 +174,9 @@ class BuildTasksController < ApplicationController
       params[:skills] = params[:skills].values if params[:skills].present?
     end
   end
+
+  def set_s3_direct_post
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+
 end

@@ -14,4 +14,6 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
+//= require jquery.ui.widget.js
+//= require z.jquery.fileupload.js
 //= require_tree .
