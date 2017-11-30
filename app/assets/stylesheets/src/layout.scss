@@ -1,15 +1,23 @@
 
 body {
   overflow-x: hidden;
-  background: black;
+  background: #333;
   color: white;
 }
 
-.yield-content {
+.panel-default {
+    background: #222;
+}
+
+.yield-content, .below {
   margin-top: 60px;
 }
 
 .navbar-white {
   background-color: white;
+}
+
+.actions {
+  margin-top: 20px;
 }
 

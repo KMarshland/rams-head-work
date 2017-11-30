@@ -13,25 +13,22 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :set_task_name %>
+    <%= form.text_field :name, id: :set_task_name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.number_field :priority, id: :set_task_priority %>
-  </div>
-
-  <div class="field">
-    <%= form.label :complete %>
-    <%= form.check_box :complete, id: :set_task_complete %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :set_task_user_id %>
+    <%= form.select :priority, [
+        ['URGENT', 0],
+        ['1 - High', 1],
+        *(2..4).map{|p| [p, p]},
+        ['5 - Medium', 5],
+        *(6..9).map{|p| [p, p]},
+        ['10 - Low', 10]
+    ], {}, id: :set_task_priority, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit nil, class: 'btn btn-default' %>
   </div>
 <% end %>

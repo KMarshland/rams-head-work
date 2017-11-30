@@ -24,4 +24,6 @@ class SetTask < ApplicationRecord
   belongs_to :user
   has_many :build_tasks
 
+  validates :name, presence: true
+
 end

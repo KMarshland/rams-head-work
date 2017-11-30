@@ -1,5 +1,6 @@
 class SetTasksController < ApplicationController
   before_action :set_set_task, only: [:show, :edit, :update, :destroy]
+  before_action :requires_admin
 
   # GET /set_tasks
   # GET /set_tasks.json
@@ -62,13 +63,17 @@ class SetTasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_set_task
-      @set_task = SetTask.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def set_task_params
-      params.require(:set_task).permit(:name, :priority, :complete, :user_id)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_set_task
+    @set_task = SetTask.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def set_task_params
+    params.require(:set_task).permit(:name, :priority, :complete, :user_id).tap do |params|
+      params[:user_id] = current_user.id if params[:user_id].blank?
     end
+  end
+
 end

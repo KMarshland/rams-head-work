@@ -30,4 +30,6 @@ class BuildTask < ApplicationRecord
   belongs_to :user
 
   serialize :skills, Array
+
+  validates :name, presence: true
 end

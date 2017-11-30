@@ -1,5 +1,6 @@
 class BuildTasksController < ApplicationController
   before_action :set_build_task, only: [:show, :edit, :update, :destroy]
+  before_action :requires_admin
 
   # GET /build_tasks
   # GET /build_tasks.json

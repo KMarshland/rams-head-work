@@ -10,12 +10,16 @@ import store from './store'
 import readConfig from './helpers/read_config'
 
 import Navigation from './navigation'
+import NewTaskButton from './main_page/new_task_button'
 
 class MainPage extends React.PureComponent {
     render() {
         return (
             <div>
                 <Navigation user={this.props.user} />
+                <div className="below">
+                    <NewTaskButton user={this.props.user} />
+                </div>
             </div>
         )
     }
@@ -25,7 +29,7 @@ class BlankPage extends React.PureComponent {
     render() {
         return (
             <div>
-
+                <Navigation user={this.props.user} />
             </div>
         )
     }
