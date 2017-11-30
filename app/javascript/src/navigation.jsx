@@ -35,8 +35,17 @@ export default class Navigation extends React.PureComponent {
                             {
                                 this.props.user &&
                                 <li>
+                                    <a href="/users/edit">
+                                        Edit profile
+                                    </a>
+                                </li>
+                            }
+
+                            {
+                                this.props.user &&
+                                <li>
                                     <a href="/users/sign_out">
-                                        Logged in as {this.props.user.get('email')}
+                                        Log out
                                     </a>
                                 </li>
                             }

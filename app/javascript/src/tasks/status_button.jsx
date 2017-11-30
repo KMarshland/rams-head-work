@@ -113,7 +113,7 @@ export default class StatusButton extends React.PureComponent {
             )
         }
 
-        const claimedByYou = this.props.user.get('id') && task.get('user_id') === this.props.user.get('id');
+        const claimedByYou = this.props.user && task.get('user_id') === this.props.user.get('id');
 
         if (claimedByYou) {
             return (
@@ -155,5 +155,5 @@ export default class StatusButton extends React.PureComponent {
 
 StatusButton.propTypes = {
     buildTask: PropTypes.instanceOf(Immutable.Map).isRequired,
-    user: PropTypes.instanceOf(Immutable.Map).isRequired,
+    user: PropTypes.instanceOf(Immutable.Map)
 };
