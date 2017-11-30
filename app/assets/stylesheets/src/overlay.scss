@@ -1,0 +1,28 @@
+
+.overlay {
+  position: fixed;
+  z-index: 2000;
+  text-align: center;
+  width: 100%;
+
+  top: 60px;
+  animation: fadeOut 4s;
+  opacity: 0;
+
+  p {
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 20px;
+    border-radius: 6px;
+    width: max-content;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    color: black;
+  }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100%   { opacity: 0; }
+}
