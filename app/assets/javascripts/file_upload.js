@@ -4,7 +4,7 @@ function initializeUploads(direct_post_url, form_data){
 
     function log() {
         for (var i = 0; i < arguments.length; i++){
-            console.log(arguments[i]);
+            // console.log(arguments[i]);
         }
     }
     
@@ -107,11 +107,27 @@ function initializeUploads(direct_post_url, form_data){
                 fileInput.wrap('<form>').closest('form').get(0).reset();
                 fileInput.unwrap();
 
+                var bytes = data.total;
+                var niceSize = 0;
+                if (bytes < 1e3) {
+                    niceSize = Math.round(bytes) + ' bytes';
+                } else if (bytes < 1e6){
+                    niceSize = Math.round(bytes / 1e3) + ' KB';
+                } else if (bytes < 1e9){
+                    niceSize = Math.round(bytes / 1e6) + ' MB';
+                } else if (bytes < 1e12){
+                    niceSize = Math.round(bytes / 1e9) + ' GB';
+                } else {
+                    niceSize = Math.round(bytes / 1e12) + ' TB';
+                }
+
                 var info = {
                     aws_key: aws_key,
                     aws_url: aws_url,
+                    url: aws_url,
                     filename: filename,
-                    filesize: data.total
+                    filesize: data.total,
+                    filesize_pretty: niceSize
                 };
 
                 fileInput.trigger('upload', info);

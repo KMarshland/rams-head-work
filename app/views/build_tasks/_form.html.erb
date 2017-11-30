@@ -25,7 +25,12 @@
 
     <div class="field">
       <%= form.label :schematic %>
-      <%= form.file_field :schematic_url, id: :build_task_schematic_url, class: 'form-control upload-input' %>
+      <%= form.file_field :schematic, id: :build_task_schematic, class: 'form-control upload-input' %>
+      <%= form.hidden_field :schematic_url, id: :build_task_schematic_url %>
+      <div id="filename"></div>
+      <div id="preview">
+
+      </div>
     </div>
 
     <div class="field">
@@ -51,4 +56,10 @@
 
 <script>
     initializeUploads("<%= @s3_direct_post.url %>", <%= sanitize @s3_direct_post.fields.to_json.html_safe %>)
+
+    $('#build_task_schematic').on('upload', function (e, info) {
+        $('#build_task_schematic_url').val(info.url);
+        $('#filename').text(info.filename + ' (' + info.filesize_pretty + ')');
+        embed(info.url, $('#preview'));
+    })
 </script>
