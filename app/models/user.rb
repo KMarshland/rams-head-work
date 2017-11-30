@@ -34,4 +34,25 @@ class User < ApplicationRecord
 
   serialize :skills, Array
 
+  def as_json(_opts={})
+    {
+        id: self.id,
+        email: self.email,
+        name: self.name,
+        is_admin: self.is_admin?,
+        role: self.role,
+        skills: self.skills
+    }
+  end
+
+  def is_admin?
+    self.admin
+  end
+
+  def make_admin
+    return if is_admin?
+
+    self.update(admin: true)
+  end
+
 end

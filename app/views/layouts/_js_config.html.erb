@@ -1,6 +1,12 @@
 
 <script>
 
+    <% if user_signed_in? %>
+    window.user = <%= sanitize current_user.to_json %>;
+    <% else %>
+    window.user = null;
+    <% end %>
+
     window.csrfToken = document.getElementsByName('csrf-token')[0].content;
 
 </script>

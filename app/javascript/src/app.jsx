@@ -7,12 +7,15 @@ import ReactDOM from 'react-dom'
 import { connect, Provider } from 'react-redux'
 
 import store from './store'
+import readConfig from './helpers/read_config'
+
+import Navigation from './navigation'
 
 class MainPage extends React.PureComponent {
     render() {
         return (
             <div>
-                <h1>Hi</h1>
+                <Navigation user={this.props.user} />
             </div>
         )
     }
@@ -28,7 +31,9 @@ class BlankPage extends React.PureComponent {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
+
+    readConfig(store);
 
     let pageType = window.location.pathname;
 
@@ -50,3 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.insertBefore(parent, document.body.childNodes[0])
     );
 });
+
