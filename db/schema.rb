@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130050032) do
+ActiveRecord::Schema.define(version: 20171130050750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "build_tasks", force: :cascade do |t|
+    t.string "name"
+    t.bigint "set_task_id"
+    t.boolean "complete"
+    t.text "notes"
+    t.string "schematic_url"
+    t.bigint "user_id"
+    t.text "skills"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["complete"], name: "index_build_tasks_on_complete"
+    t.index ["set_task_id"], name: "index_build_tasks_on_set_task_id"
+    t.index ["user_id"], name: "index_build_tasks_on_user_id"
+  end
+
+  create_table "set_tasks", force: :cascade do |t|
+    t.string "name"
+    t.integer "priority"
+    t.boolean "complete"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["complete"], name: "index_set_tasks_on_complete"
+    t.index ["user_id"], name: "index_set_tasks_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,4 +62,7 @@ ActiveRecord::Schema.define(version: 20171130050032) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "build_tasks", "set_tasks"
+  add_foreign_key "build_tasks", "users"
+  add_foreign_key "set_tasks", "users"
 end

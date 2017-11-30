@@ -1,0 +1,37 @@
+<%= form_with(model: set_task, local: true) do |form| %>
+  <% if set_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(set_task.errors.count, "error") %> prohibited this set_task from being saved:</h2>
+
+      <ul>
+      <% set_task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :set_task_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.number_field :priority, id: :set_task_priority %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complete %>
+    <%= form.check_box :complete, id: :set_task_complete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :set_task_user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

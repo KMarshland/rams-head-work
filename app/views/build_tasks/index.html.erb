@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Build Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Set task</th>
+      <th>Complete</th>
+      <th>Notes</th>
+      <th>Schematic url</th>
+      <th>User</th>
+      <th>Skills</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @build_tasks.each do |build_task| %>
+      <tr>
+        <td><%= build_task.name %></td>
+        <td><%= build_task.set_task %></td>
+        <td><%= build_task.complete %></td>
+        <td><%= build_task.notes %></td>
+        <td><%= build_task.schematic_url %></td>
+        <td><%= build_task.user %></td>
+        <td><%= build_task.skills %></td>
+        <td><%= link_to 'Show', build_task %></td>
+        <td><%= link_to 'Edit', edit_build_task_path(build_task) %></td>
+        <td><%= link_to 'Destroy', build_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Build Task', new_build_task_path %>

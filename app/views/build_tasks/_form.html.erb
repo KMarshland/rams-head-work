@@ -1,0 +1,52 @@
+<%= form_with(model: build_task, local: true) do |form| %>
+  <% if build_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(build_task.errors.count, "error") %> prohibited this build_task from being saved:</h2>
+
+      <ul>
+      <% build_task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :build_task_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :set_task_id %>
+    <%= form.text_field :set_task_id, id: :build_task_set_task_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complete %>
+    <%= form.check_box :complete, id: :build_task_complete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :build_task_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :schematic_url %>
+    <%= form.text_field :schematic_url, id: :build_task_schematic_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :build_task_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :skills %>
+    <%= form.text_area :skills, id: :build_task_skills %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
