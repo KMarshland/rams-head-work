@@ -17,7 +17,15 @@ import BuildTaskPanel from './tasks/build_task_panel'
 class MainPage extends React.PureComponent {
     render() {
 
-        const tasks = this.props.setTasks.sortBy((task) => {
+        const incompleteTasks = this.props.setTasks.filter(function (task) {
+            return !task.get('complete');
+        }).sortBy((task) => {
+            return task.get('priority');
+        });
+
+        const completeTasks = this.props.setTasks.filter(function (task) {
+            return task.get('complete');
+        }).sortBy((task) => {
             return task.get('priority');
         });
 
@@ -27,7 +35,7 @@ class MainPage extends React.PureComponent {
                 <div className="below">
                     <NewTaskButton user={this.props.user} />
 
-                    {tasks.map((function (setTask) {
+                    {incompleteTasks.map((function (setTask) {
                         return (
                             <SetTaskPanel key={setTask.get('id')}
                                           setTask={setTask}
@@ -35,6 +43,24 @@ class MainPage extends React.PureComponent {
                             />
                         )
                     }).bind(this))}
+
+                    {
+                        completeTasks.length > 0 &&
+                        <h1 className="text-center">
+                            Completed tasks
+                        </h1>
+                    }
+
+                    <div className="completed-tasks">
+                        {completeTasks.map((function (setTask) {
+                            return (
+                                <SetTaskPanel key={setTask.get('id')}
+                                              setTask={setTask}
+                                              user={this.props.user}
+                                />
+                            )
+                        }).bind(this))}
+                    </div>
                 </div>
             </div>
         )
