@@ -34,6 +34,10 @@ class User < ApplicationRecord
 
   serialize :skills, Array
 
+  def to_s
+    self.name || self.email
+  end
+
   def as_json(_opts={})
     {
         id: self.id,

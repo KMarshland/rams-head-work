@@ -1,25 +1,24 @@
 
 .task-panel {
-  .delete-button {
-    font-size: 1.6em;
 
-    $size: 40px;
-    width: $size;
-    height: $size;
-    padding: 5px;
-
-    background: #111;
-    border-radius: 6px;
-    border: 1px solid #333;
-
-    text-align: center;
-    color: #CCC;
-
-    cursor: pointer;
-
+  .priority {
+    font-size: 2em;
+    border-left: 8px solid;
+    padding-left: 14px;
   }
 
-  .delete-button:hover, .delete-button:focus {
-    color: #EEE;
+  .priority-0 {
+    border-color: red;
+    font-size: 4em;
   }
+
+  $base-color: #7FFF00;
+
+  @for $i from 1 through 10 {
+    .priority-#{$i} {
+      $percent-darken: $i * 3;
+      border-color: darken($base-color, $percent-darken);
+    }
+  }
+
 }

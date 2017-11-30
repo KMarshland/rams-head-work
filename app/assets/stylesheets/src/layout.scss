@@ -6,7 +6,34 @@ body {
 }
 
 .panel-default {
-    background: #222;
+  background: #222;
+
+  .panel-button {
+    font-size: 1.6em;
+
+    $size: 40px;
+    width: $size;
+    height: $size;
+    padding: 5px;
+
+    background: #111;
+    border-radius: 6px;
+    border: 1px solid #333;
+
+    text-align: center;
+    color: #CCC;
+
+    cursor: pointer;
+
+  }
+
+  .panel-button + .panel-button {
+    margin-right: 5px;
+  }
+
+  .panel-button:hover, .panel-button:focus {
+    color: #EEE;
+  }
 }
 
 .yield-content, .below {

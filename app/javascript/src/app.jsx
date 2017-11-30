@@ -55,7 +55,7 @@ document.addEventListener('turbolinks:load', () => {
 
     let pageType = window.location.pathname;
 
-    if (/\/set_tasks\/\d+/.test(pageType)) {
+    if (/\/set_tasks\/\d+\/?$/.test(pageType)) {
         pageType = '/set_tasks/*';
     }
 

@@ -26,4 +26,17 @@ class SetTask < ApplicationRecord
 
   validates :name, presence: true
 
+  def as_json(_opts={})
+    {
+        id: self.id,
+        name: self.name,
+        priority: self.priority,
+        complete: self.complete,
+        user_name: self.user.name,
+        user_email: self.user.email,
+        created_at: self.created_at,
+        updated_at: self.updated_at
+    }
+  end
+
 end
