@@ -34,6 +34,20 @@ body {
   .panel-button:hover, .panel-button:focus {
     color: #EEE;
   }
+
+  .sub-panel {
+    background: #111;
+    text-align: center;
+    color: #EEE;
+
+    a {
+      color: #DDD;
+    }
+
+    a:hover, a:focus {
+      color: #FFF;
+    }
+  }
 }
 
 .yield-content, .below {

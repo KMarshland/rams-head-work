@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :build_tasks
-  resources :set_tasks
+  resources :set_tasks do
+    resources :build_tasks
+  end
+
   devise_for :users
   root 'home#home'
 

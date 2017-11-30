@@ -53,6 +53,19 @@ export default class SetTaskPanel extends React.PureComponent {
                         </p>
                     </div>
 
+                    <div className="sub-panels">
+
+                        <div className="panel panel-default sub-panel col-md-4">
+                            <div className="panel-body">
+                                <a className="add-build-task" href={'/set_tasks/' + task.get('id') + '/build_tasks/new'}>
+                                    <i className="fa fa-plus" />
+                                    <span className="label">Add a build task</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         );
