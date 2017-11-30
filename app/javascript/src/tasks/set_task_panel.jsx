@@ -42,7 +42,9 @@ export default class SetTaskPanel extends React.PureComponent {
                     </a>
 
                     <h1 className="text-center">
-                        {task.get('name')}
+                        <a href={'/set_tasks/' + task.get('id')}>
+                            {task.get('name')}
+                        </a>
                     </h1>
 
                     <div className={'priority priority-' + task.get('priority')}>
