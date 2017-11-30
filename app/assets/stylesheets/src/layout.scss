@@ -5,6 +5,14 @@ body {
   color: white;
 }
 
+.navbar-brand {
+  padding: 1px;
+  
+  img {
+    max-height: 100%;
+  }
+}
+
 .panel-default {
   background: #222;
 

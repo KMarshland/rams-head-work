@@ -13,7 +13,7 @@ export default class Navigation extends React.PureComponent {
                             <i className="fa fa-bars" />
                         </button>
                         <a href="/" className="navbar-brand">
-                            Ram's Head Theater
+                            <img src="http://logosandbrands.directory/wp-content/themes/directorypress/thumbs/Rams-Head-Theatrical-Society-Stanford-University-logo.jpg" />
                         </a>
                     </div>
                     <div className="collapse navbar-collapse">
