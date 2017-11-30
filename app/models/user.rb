@@ -59,4 +59,19 @@ class User < ApplicationRecord
     self.update(admin: true)
   end
 
+  def self.skills
+    [
+        'Beginner Carpentry',
+        'Intermediate Carpentry',
+        'Advanced Carpentry',
+        'Welding',
+        'Table Saw',
+        'Scroll Saw',
+        'Miter Saw',
+        'Beginner Painting',
+        'Advanced Painting',
+        'Drilling'
+    ]
+  end
+
 end

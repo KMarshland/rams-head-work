@@ -1,5 +1,8 @@
 <h1>New Build Task</h1>
 
-<%= render 'form', build_task: @build_task %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= render 'form', build_task: @build_task, url: set_task_build_tasks_path %>
+  </div>
+</div>
 
-<%= link_to 'Back', build_tasks_path %>

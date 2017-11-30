@@ -27,9 +27,29 @@
 
 class BuildTask < ApplicationRecord
   belongs_to :set_task
-  belongs_to :user
+  belongs_to :user, optional: true
 
   serialize :skills, Array
 
   validates :name, presence: true
+  validates :set_task, presence: true
+
+  def as_json(opts)
+    {
+        id: self.id,
+        name: self.name,
+        set_task_id: self.set_task_id,
+        complete: self.complete,
+        notes: self.notes,
+        schematic_url: self.schematic_url,
+        skills: self.skills,
+
+        user_id: self.user_id,
+        user_name: self.user_id.present? ? self.user.name : nil,
+        user_email: self.user_id.present? ? self.user.email : nil,
+        created_at: self.created_at,
+        updated_at: self.updated_at
+    }
+  end
+
 end

@@ -1,39 +1,4 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @build_task.name %>
-</p>
-
-<p>
-  <strong>Set task:</strong>
-  <%= @build_task.set_task %>
-</p>
-
-<p>
-  <strong>Complete:</strong>
-  <%= @build_task.complete %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @build_task.notes %>
-</p>
-
-<p>
-  <strong>Schematic url:</strong>
-  <%= @build_task.schematic_url %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @build_task.user %>
-</p>
-
-<p>
-  <strong>Skills:</strong>
-  <%= @build_task.skills %>
-</p>
-
-<%= link_to 'Edit', edit_build_task_path(@build_task) %> |
-<%= link_to 'Back', build_tasks_path %>
+<script>
+    window.build_task = <%= sanitize @build_task.to_json %>;
+</script>

@@ -1,5 +1,5 @@
 class BuildTasksController < ApplicationController
-  before_action :set_build_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_tasks, only: [:show, :edit, :update, :destroy]
   before_action :requires_admin
 
   # GET /build_tasks
@@ -16,6 +16,7 @@ class BuildTasksController < ApplicationController
   # GET /build_tasks/new
   def new
     @build_task = BuildTask.new
+    @build_task.set_task_id = params[:set_task_id]
   end
 
   # GET /build_tasks/1/edit
@@ -29,7 +30,7 @@ class BuildTasksController < ApplicationController
 
     respond_to do |format|
       if @build_task.save
-        format.html { redirect_to @build_task, notice: 'Build task was successfully created.' }
+        format.html { redirect_to set_task_build_task_path(@build_task.set_task, @build_task), notice: 'Build task was successfully created.' }
         format.json { render :show, status: :created, location: @build_task }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class BuildTasksController < ApplicationController
   def update
     respond_to do |format|
       if @build_task.update(build_task_params)
-        format.html { redirect_to @build_task, notice: 'Build task was successfully updated.' }
+        format.html { redirect_to set_task_build_task_path(@build_task.set_task, @build_task), notice: 'Build task was successfully updated.' }
         format.json { render :show, status: :ok, location: @build_task }
       else
         format.html { render :edit }
@@ -63,13 +64,17 @@ class BuildTasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_build_task
-      @build_task = BuildTask.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tasks
+    @set_task = SetTask.find(params[:set_task_id])
+    @build_task = BuildTask.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def build_task_params
-      params.require(:build_task).permit(:name, :set_task_id, :complete, :notes, :schematic_url, :user_id, :skills)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def build_task_params
+    params.require(:build_task).permit(:name, :set_task_id, :complete, :notes, :schematic_url, :user_id,
+                                       skills: (0..User.skills.length).map(&:to_s)).tap do |params|
+      params[:skills] = params[:skills].values
     end
+  end
 end
