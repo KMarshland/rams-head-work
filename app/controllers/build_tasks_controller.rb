@@ -2,6 +2,7 @@ class BuildTasksController < ApplicationController
   before_action :set_tasks, only: [:show, :edit, :update, :destroy, :claim, :relinquish, :mark_complete]
   before_action :requires_admin, except: [:show, :claim, :relinquish, :mark_complete]
   before_action :set_s3_direct_post, only: [:edit, :new]
+  before_action :authenticate_user!, only: [:claim, :relinquish, :mark_complete]
 
   def claim
     if @build_task.user.present?
