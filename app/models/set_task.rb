@@ -20,7 +20,7 @@
 
 class SetTask < ApplicationRecord
   belongs_to :user
-  has_many :build_tasks
+  has_many :build_tasks, dependent: :destroy
 
   validates :name, presence: true
 

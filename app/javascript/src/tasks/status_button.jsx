@@ -52,9 +52,7 @@ export default class StatusButton extends React.PureComponent {
 
         if (opts.requestNotes) {
             swal({title: 'Any notes?', input: 'textarea'}).then((function(r){
-                if (r.value) {
-                    go.call(this, r.value);
-                }
+                go.call(this, r.value);
             }).bind(this));
         } else {
             go.call(this);

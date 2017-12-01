@@ -1,6 +1,6 @@
 class SetTasksController < ApplicationController
   before_action :set_set_task, only: [:show, :edit, :update, :destroy]
-  before_action :requires_admin
+  before_action :requires_admin, except: [:show]
 
   # GET /set_tasks
   # GET /set_tasks.json
