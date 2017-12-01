@@ -57,36 +57,39 @@ export default class SetTaskPanel extends React.PureComponent {
                         </p>
                     </div>
 
-                    <div className="sub-panels">
+                    {
+                        !this.props.hideSubpanels &&
+                        <div className="sub-panels">
 
-                        {
-                            task.get('build_tasks').sortBy((task) => {
-                                return task.get('id');
-                            }).map((function (buildTask, i) {
-                                return (
-                                    <BuildTaskSubpanel key={i}
-                                                       buildTask={buildTask}
-                                                       user={this.props.user}
-                                    />
-                                )
-                            }).bind(this))
-                        }
+                            {
+                                task.get('build_tasks').sortBy((task) => {
+                                    return task.get('id');
+                                }).map((function (buildTask, i) {
+                                    return (
+                                        <BuildTaskSubpanel key={i}
+                                                           buildTask={buildTask}
+                                                           user={this.props.user}
+                                        />
+                                    )
+                                }).bind(this))
+                            }
 
-                        {
-                            this.props.user && this.props.user.get('is_admin') &&
-                            <div className="col-md-4">
-                                <div className="panel panel-default sub-panel">
-                                    <div className="panel-body" onClick={() => {window.location = '/set_tasks/' + task.get('id') + '/build_tasks/new'}}>
-                                        <a className="add-build-task" href={'/set_tasks/' + task.get('id') + '/build_tasks/new'}>
-                                            <i className="fa fa-plus" />
-                                            <span className="label">Add a build task</span>
-                                        </a>
+                            {
+                                this.props.user && this.props.user.get('is_admin') &&
+                                <div className="col-md-4">
+                                    <div className="panel panel-default sub-panel">
+                                        <div className="panel-body" onClick={() => {window.location = '/set_tasks/' + task.get('id') + '/build_tasks/new'}}>
+                                            <a className="add-build-task" href={'/set_tasks/' + task.get('id') + '/build_tasks/new'}>
+                                                <i className="fa fa-plus" />
+                                                <span className="label">Add a build task</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
 
-                    </div>
+                        </div>
+                    }
 
                 </div>
             </div>
@@ -110,5 +113,6 @@ export default class SetTaskPanel extends React.PureComponent {
 
 SetTaskPanel.propTypes = {
     setTask: PropTypes.instanceOf(Immutable.Map).isRequired,
-    user: PropTypes.instanceOf(Immutable.Map)
+    user: PropTypes.instanceOf(Immutable.Map),
+    hideSubpanels: PropTypes.bool
 };

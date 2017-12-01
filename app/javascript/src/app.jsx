@@ -40,6 +40,7 @@ class MainPage extends React.PureComponent {
                             <SetTaskPanel key={setTask.get('id')}
                                           setTask={setTask}
                                           user={this.props.user}
+                                          hideSubpanels={true}
                             />
                         )
                     }).bind(this))}
@@ -57,6 +58,7 @@ class MainPage extends React.PureComponent {
                                 <SetTaskPanel key={setTask.get('id')}
                                               setTask={setTask}
                                               user={this.props.user}
+                                              hideSubpanels={true}
                                 />
                             )
                         }).bind(this))}
